@@ -1,54 +1,38 @@
 // Subscribe to changes on an object:
-var Obj = (function() {
-	var map = [],
-		has = {}.hasOwnProperty;
-
-	function Init(obj) {
-		for (var key in obj) {
-			if (has.call(obj, key)) this[key] = obj[key];
-		}
-	}
-
-	function Obj(obj) {
-		return new Init(obj);
-	}
-
-	Obj.fn = Init.prototype = {
-		subscribe: function(fn, callNow) {
+var Obj = (function(map) {
+	var Obj = {
+		getSubscribers: function(obj) {
 			for (var i = 0, l = map.length; i < l; i++) {
-				if (map[i][0] === this) {
-					map[i][1].push(fn);
-					return;
+				if (map[i][0] === obj) {
+					return map[i][1];
 				}
 			}
-			map.push([this, [fn]]);
-			
-			if (callNow) fn(this);
 		},
 
-		set: function(key, value) {
-			this[key] = value;
-			this.changed();
+		subscribe: function(obj, fn, callNow) {
+			var subscribers = Obj.getSubscribers(obj);
+			if (subscribers) subscribers.push(fn);
+			else map.push([obj, [fn]]);
+			if (callNow) fn(obj);
 		},
 
-		remove: function(key) {
-			delete this[key];
-			this.changed();
+		set: function(obj, key, value) {
+			obj[key] = value;
+			Obj.changed(obj);
 		},
 
-		changed: function() {
-			for (var i = 0, l = map.length; i < l; i++) {
-				if (map[i][0] === this) {
-					var subscribers = map[i][1],
-						numSubscribers = subscribers.length;
-					for (var j = 0; j < numSubscribers; j++) {
-						subscribers[j](this);
-					}
-					return;
-				}
+		remove: function(obj, key) {
+			delete obj[key];
+			Obj.changed(obj);
+		},
+
+		changed: function(obj) {
+			var subscribers = Obj.getSubscribers(obj),
+				numSubscribers = subscribers.length;
+			for (var j = 0; j < numSubscribers; j++) {
+				subscribers[j](obj);
 			}
 		}
 	};
-
 	return Obj;
-})();
+})([]);

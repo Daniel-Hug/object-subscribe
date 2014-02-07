@@ -8,34 +8,32 @@ Subscribe to changes on an object
 
 Create an object:
 ```
-var person = new Obj({
+var person = {
 	name: 'Joey',
 	age: 3
-});
+};
 ```
 
-Subscribe to changes made to the object through the `set` and `remove` methods:
+Subscribe to changes made to the object:
 ```
-person.subscribe(function(newPersonObject) {
+Obj.subscribe(person, function(newPersonObject) {
 	console.log(newPersonObject);
 }, true); // Pass true to execute callback now.
 ```
 
-The callback passed to the `subscribe` method is called every time one of the following methods is called:
+The callback passed to `Obj.subscribe` is called every time one of the following is called:
 
- - `set`
- - `remove`
- - `changed`
-
-So you can call `person.set('name', 'Bob')`, and the callback will be called with the new object.
+ - `Obj.set` e.g. `Obj.set(person, 'name', 'Bob')`
+ - `Obj.remove` e.g. `Obj.remove(person, 'age')`
+ - `Obj.changed` e.g. `person.age++; Obj.changed(person)`
 
 
 ## Add your own methods:
 
 ```
-Obj.fn.increment = function(key) {
-	this[key]++;
-	this.changed(); // notify subscribers of new change
+Obj.increment = function(obj, key) {
+	obj[key]++;
+	Obj.changed(obj); // Notify subscribers of change
 };
-person.increment('age');
+Obj.increment(person, 'age');
 ```
