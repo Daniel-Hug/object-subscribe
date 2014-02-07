@@ -27,6 +27,12 @@ The callback passed to `Obj.subscribe` is called every time one of the following
  - `Obj.remove` e.g. `Obj.remove(person, 'age')`
  - `Obj.changed` e.g. `person.age++; Obj.changed(person)`
 
+You can also unsubscribe with `Obj.cutTies`:
+```
+Obj.cutTies(person); // Unsubscribe all
+Obj.cutTies(person, [fn1, fn2]); // Unsubscribe one or more functions
+```
+
 
 ## Add your own methods:
 
