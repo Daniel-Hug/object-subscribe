@@ -3,6 +3,8 @@ Obj.js
 
 Subscribe to changes on an object
 
+464 bytes minified, 278 bytes minified and gzipped
+
 
 ## Usage
 
