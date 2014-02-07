@@ -4,13 +4,14 @@ var Obj = (function(map) {
 		for (var i = 0, l = map.length; i < l; i++) {
 			if (map[i][0] === obj) return i;
 		}
+		return -1;
 	}
 
 	return {
 		subscribe: function(obj, fn, callNow) {
-			var index;
-			if ((index = getIndex(obj))) map[index][1].push(fn);
-			else map.push([obj, [fn]]);
+			var index = getIndex(obj);
+			if (index === -1)  map.push([obj, [fn]]);
+			else map[index][1].push(fn);
 			if (callNow) fn(obj);
 		},
 
@@ -33,7 +34,9 @@ var Obj = (function(map) {
 		},
 
 		changed: function(obj) {
-			var subscribers = map[getIndex(obj)][1],
+			var index = getIndex(obj);
+			if (index === -1) return;
+			var subscribers = map[index][1],
 				numSubscribers = subscribers.length;
 			for (var j = 0; j < numSubscribers; j++) {
 				subscribers[j](obj);
