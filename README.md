@@ -3,7 +3,7 @@ Obj.js
 
 Subscribe to changes on an object
 
-494 bytes minified, 297 bytes minified and gzipped
+497 bytes minified, 290 bytes minified and gzipped
 
 
 ## Usage
@@ -25,14 +25,14 @@ Obj.subscribe(person, function(newPersonObject) {
 
 The callback passed to `Obj.subscribe` is called every time one of the following is called:
 
- - `Obj.set` e.g. `Obj.set(person, 'name', 'Bob')`
- - `Obj.remove` e.g. `Obj.remove(person, 'age')`
- - `Obj.changed` e.g. `person.age++; Obj.changed(person)`
+ - `Obj.set` e.g. `Obj.set(person, 'name', 'Bob');`
+ - `Obj.unset` e.g. `Obj.unset(person, 'age');`
+ - `Obj.changed` e.g. `person.age++; Obj.changed(person);`
 
-You can also unsubscribe with `Obj.cutTies`:
+Unsubscribe with `Obj.unsubscribe`:
 ```
-Obj.cutTies(person); // Unsubscribe all
-Obj.cutTies(person, [fn1, fn2]); // Unsubscribe one or more functions
+Obj.unsubscribe(person); // Unsubscribe all
+Obj.unsubscribe(person, [fn1, fn2]); // Unsubscribe one or more functions
 ```
 
 

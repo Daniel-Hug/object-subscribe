@@ -15,7 +15,7 @@ var Obj = (function(map) {
 			if (callNow) fn(obj);
 		},
 
-		cutTies: function(obj, arr) {
+		unsubscribe: function(obj, arr) {
 			if (arr) {
 				var subscribers = map[getIndex(obj)][1];
 				for (var l = arr.length; l--;) subscribers.splice(subscribers.indexOf(arr[l]), 1);
@@ -28,7 +28,7 @@ var Obj = (function(map) {
 			Obj.changed(obj);
 		},
 
-		remove: function(obj, key) {
+		unset: function(obj, key) {
 			delete obj[key];
 			Obj.changed(obj);
 		},
