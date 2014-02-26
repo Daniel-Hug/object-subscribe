@@ -1,0 +1,13 @@
+{
+	"author": "Daniel Hug",
+	"name": "Obj.js",
+	"description": "Unobtrusive object subscription & manipulation",
+	"version": "1.0.0",
+	"repository": {
+		"url": "https://github.com/Daniel-Hug/Obj.js"
+	},
+	"main": "Obj.js",
+	"engines": {
+		"node": "*"
+	}
+}

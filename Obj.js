@@ -1,5 +1,13 @@
 // Subscribe to changes on an object:
-var Obj = (function(map) {
+(function (root, factory) {
+	if (typeof define === 'function' && define.amd)
+		define([], factory);
+	else if (typeof exports === 'object')
+		module.exports = factory();
+	else root.returnExports = factory();
+})(this, function () {
+	var map = [];
+
 	// requires: map
 	function getIndex(obj) {
 		for (var i = 0, l = map.length; i < l; i++) {
@@ -70,4 +78,4 @@ var Obj = (function(map) {
 			}
 		}
 	};
-})([]);
+});

@@ -1,9 +1,9 @@
 Obj.js
 ======
 
-Subscribe to changes on an object
+Unobtrusive object subscription & manipulation
 
-800 bytes minified, 401 bytes minified and gzipped
+936 bytes minified, 469 bytes minified and gzipped
 
 
 ## Create & subscribe to an object
