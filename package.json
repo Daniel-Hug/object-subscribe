@@ -1,6 +1,6 @@
 {
 	"author": "Daniel Hug",
-	"name": "Obj.js",
+	"name": "obj.js",
 	"description": "Unobtrusive object subscription & manipulation",
 	"version": "1.0.0",
 	"repository": {
