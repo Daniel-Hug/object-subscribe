@@ -1,4 +1,6 @@
-// Subscribe to changes on an object:
+// Obj.js | Unobtrusive object subscription & manipulation
+// https://github.com/Daniel-Hug/Obj.js
+
 (function (root, factory) {
 	if (typeof define === 'function' && define.amd)
 		define([], factory);
