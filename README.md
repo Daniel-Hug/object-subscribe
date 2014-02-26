@@ -1,7 +1,5 @@
-Obj.js
-======
-
-Unobtrusive object subscription & manipulation
+Unobtrusive JS object subscribe
+===============================
 
 936 bytes minified, 469 bytes minified and gzipped
 

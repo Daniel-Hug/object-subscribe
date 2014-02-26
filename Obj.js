@@ -1,5 +1,5 @@
-// Obj.js | Unobtrusive object subscription & manipulation
-// https://github.com/Daniel-Hug/Obj.js
+// obj.js | Unobtrusive object subscribe
+// https://github.com/Daniel-Hug/object-subscribe
 
 (function (root, factory) {
 	if (typeof define === 'function' && define.amd)

@@ -1,8 +1,8 @@
 {
 	"author": "Daniel Hug",
 	"name": "object-subscribe",
-	"version": "1.0.0",
-	"description": "Unobtrusive object subscription & manipulation",
+	"version": "1.0.1",
+	"description": "Unobtrusive object subscribe / watch / bind",
 	"keywords": [
 		"subscribe",
 		"watch",
@@ -13,10 +13,10 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Daniel-Hug/Obj.js"
+		"url": "https://github.com/Daniel-Hug/object-subscribe"
 	},
 	"license": "Unlicense",
-	"main": "Obj.js",
+	"main": "obj.js",
 	"engines": {
 		"node": "*"
 	}
