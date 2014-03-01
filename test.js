@@ -1,2 +1,2 @@
-var Obj = require('./Obj.js');
+var Obj = require('./obj.js');
 console.log(Obj.keys(Obj));
