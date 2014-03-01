@@ -6,7 +6,7 @@
 		define([], factory);
 	else if (typeof exports === 'object')
 		module.exports = factory();
-	else root.returnExports = factory();
+	else root.Obj = factory();
 })(this, function () {
 	var map = [];
 
