@@ -32,21 +32,21 @@
 
 		// requires: getIndex, map
 		subscribe: function(obj, fn, callNow) {
-			var index = getIndex(obj);
-			if (index >= 0) map[index][1].push(fn);
+			var mapIndex = getIndex(obj);
+			if (mapIndex >= 0) map[mapIndex][1].push(fn);
 			else map.push([obj, [fn]]);
 			if (callNow) fn(obj);
 		},
 
 		// requires: getIndex, map
 		unsubscribe: function(obj, arr) {
-			var index = getIndex(obj), s;
-			if (index >= 0) {
+			var mapIndex = getIndex(obj), s, i;
+			if (mapIndex >= 0) {
 				if (arr) {
-					s = map[getIndex(obj)][1];
-					if (s && s.length) for (var i = arr.length; i--;) s.splice(s.indexOf(arr[i]), 1);
+					s = map[mapIndex][1];
+					if (s && s.length) for (i = arr.length; i--;) s.splice(s.indexOf(arr[i]), 1);
 				}
-				else map.splice(getIndex(obj), 1);
+				else map.splice(mapIndex, 1);
 			}
 		},
 
@@ -70,12 +70,12 @@
 
 		// requires: getIndex, map
 		changed: function(obj) {
-			var index = getIndex(obj);
-			if (index >= 0) {
-				var subscribers = map[index][1],
+			var mapIndex = getIndex(obj), i;
+			if (mapIndex >= 0) {
+				var subscribers = map[mapIndex][1],
 				numSubscribers = subscribers.length;
-				for (var j = 0; j < numSubscribers; j++) {
-					subscribers[j](obj);
+				for (i = 0; i < numSubscribers; i++) {
+					subscribers[i](obj);
 				}
 			}
 		}
