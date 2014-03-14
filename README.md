@@ -1,7 +1,7 @@
 Unobtrusive JS object subscribe
 ===============================
 
-930 bytes minified, 468 bytes minified and gzipped
+1.3 kb bytes minified, 587 bytes minified and gzipped
 ```
 npm install object-subscribe
 ```
@@ -61,10 +61,12 @@ Obj.unsubscribe(person, [fn1, fn2]); // Unsubscribe one or more functions
 
 ## Helper functions
 
-You also get two bonus helper functions. `Obj.has` for safe `hasOwnProperty` checks and `Obj.keys` which returns an array of an object's keys. `Obj.keys` uses the native `Object.keys` if available:
+You also get four bonus helper functions. `Obj.has` for safe `hasOwnProperty` checks and `Obj.keys` which returns an array of an object's keys, `Obj.type` as a more robust `typeof`, and `Obj.extend` for cloning and extending simple objects. `Obj.keys` uses the native `Object.keys` if available.
 ```
-Obj.has(person, 'name');
-Obj.keys(person);
+Obj.has(person, 'name');          //=> true
+Obj.keys(person);                 //=> ['name', 'age']
+Obj.type([]);                     //=> 'array'
+Obj.extend(person, {height: 50}); //=> {name: 'Bob', age: 7, height: 50}
 ```
 
 

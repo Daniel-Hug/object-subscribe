@@ -8,7 +8,8 @@
 		module.exports = factory();
 	else root.Obj = factory();
 })(this, function () {
-	var map = [];
+	var map = [],
+	objProto = {};
 
 	// requires: map
 	function getIndex(obj) {
@@ -19,8 +20,9 @@
 	}
 
 	return {
+		// requires: objProto
 		has: function(obj, key) {
-			return {}.hasOwnProperty.call(obj, key);
+			return objProto.hasOwnProperty.call(obj, key);
 		},
 
 		// requires: has
@@ -28,6 +30,26 @@
 			var keys = [];
 			for (var key in obj) if (Obj.has(obj, key)) keys.push(key);
 			return keys;
+		},
+
+		// requires: objProto
+		type: function(obj) {
+			return objProto.toString.call(obj).slice(8,-1).toLowerCase();
+		},
+
+		// requires: has, type, extend
+		extend: function(obj, newObj) {
+			if (typeof obj === 'object') {
+				if (Obj.type(obj) === 'array') {
+					newObj = newObj || [];
+					for (var i = 0, l = obj.length; i < l; i++) newObj.push(Obj.extend(obj[i]));
+				} else {
+					newObj = newObj || {};
+					for (var key in obj) if (Obj.has(obj, key))
+						newObj[key] = Obj.extend(obj[key]);
+				}
+			} else return obj;
+			return newObj;
 		},
 
 		// requires: getIndex, map
