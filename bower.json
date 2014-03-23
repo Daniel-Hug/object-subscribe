@@ -1,0 +1,35 @@
+{
+	"name": "object-subscribe",
+	"version": "2.0.0",
+	"homepage": "https://github.com/Daniel-Hug/object-subscribe",
+	"authors": [
+		"Daniel Hug <danielthehug@gmail.com>"
+	],
+	"description": "Unobtrusive object subscribe / watch / bind",
+	"main": "obj.js",
+	"moduleType": [
+		"amd",
+		"globals",
+		"node"
+	],
+	"keywords": [
+		"subscribe",
+		"watch",
+		"bind",
+		"object",
+		"listen",
+		"callback",
+		"extend",
+		"copy",
+		"toType",
+		"hasOwnProperty"
+	],
+	"license": "Unlicense",
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	]
+}
