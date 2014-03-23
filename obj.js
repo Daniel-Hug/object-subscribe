@@ -19,7 +19,7 @@
 		return -1;
 	}
 
-	return {
+	var Obj = {
 		// requires: objProto
 		has: function(obj, key) {
 			return objProto.hasOwnProperty.call(obj, key);
@@ -102,4 +102,5 @@
 			}
 		}
 	};
+	return Obj;
 });

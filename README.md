@@ -1,7 +1,7 @@
 Unobtrusive JS object subscribe
 ===============================
 
-1.3 kb bytes minified, 587 bytes minified and gzipped
+1.2 kb bytes minified, 587 bytes minified and gzipped
 ```
 npm install object-subscribe
 ```
