@@ -61,12 +61,25 @@ Obj.unsubscribe(person, [fn1, fn2]); // Unsubscribe one or more functions
 
 ## Helper functions
 
-You also get four bonus helper functions. `Obj.has` for safe `hasOwnProperty` checks and `Obj.keys` which returns an array of an object's keys, `Obj.type` as a more robust `typeof`, and `Obj.extend` for cloning and extending simple objects. `Obj.keys` uses the native `Object.keys` if available.
+obj.js comes with four helper functions. `Obj.has` for safe `hasOwnProperty` checks and `Obj.keys` which returns an array of an object's keys, `Obj.type` as a more robust `typeof`, and `Obj.extend` for cloning and extending simple objects and arrays. `Obj.keys` uses the native `Object.keys` if available.
 ```
 Obj.has(person, 'name');          //=> true
 Obj.keys(person);                 //=> ['name', 'age']
 Obj.type([]);                     //=> 'array'
-Obj.extend(person, {height: 50}); //=> {name: 'Bob', age: 7, height: 50}
+Obj.extend({height: 50}, person); //=> {name: 'Bob', age: 7, height: 50}
+```
+
+### More examples using `Obj.extend`
+
+```
+// Clone an object or an array:
+var clonedObjOrArray = Obj.extend(objectOrArray);
+
+// Extend objectB with objectA's properties:
+Obj.extend(objectA, objectB);
+
+// Add the items in arrayA to the end of arrayB:
+Obj.extend(arrayA, arrayB);
 ```
 
 
