@@ -18,41 +18,49 @@ var testObj = {
 	age: 17
 };
 
+var numPassed = 0;
+var numFailed = 0;
+function assert(bool, msg) {
+	console.log((bool ? 'Pass' : 'Fail') + ': ' + msg);
+	if (bool) numPassed++;
+	else numFailed++;
+}
+
 
 // has
-console.assert(
+assert(
 	Obj.has(Obj, 'has'),
-	'Obj.has is not working'
+	'Obj.has works'
 );
 
 
 // keys
-console.assert(
+assert(
 	JSON.stringify(Obj.keys(Obj)) === JSON.stringify(ObjProps),
-	'Obj.keys(Obj) returns unexpected value'
+	'Obj.keys(Obj) returns expected value'
 );
 
 
 // type
-console.assert(
+assert(
 	Obj.type([]) === 'array',
-	'Obj.type([]) is not "array"'
+	'Obj.type([]) is "array"'
 );
 
 
 // extend
-console.assert(
+assert(
 	Obj.extend(testObj) !== testObj,
-	'Obj.extend is not working'
+	'Obj.extend works'
 );
 
 
 // subscribe & unsubscribe
 var i = 0;
 Obj.subscribe(testObj, function(newObj) {
-	console.assert(
+	assert(
 		++i === 1 && newObj === testObj,
-	'Obj.subscribe and/or Obj.unsubscribe is not working'
+	'Obj.subscribe and Obj.unsubscribe work'
 	);
 }, true);
 
@@ -63,29 +71,34 @@ Obj.unsubscribe(testObj);
 Obj.set(testObj, {
 	height: 5
 });
-console.assert(testObj.height === 5, 'Obj.set is not working');
+assert(testObj.height === 5, 'Obj.set works');
 
 
 // unset
 Obj.unset(testObj, ['height']);
-console.assert(testObj.height === undefined, 'Obj.unset is not working');
+assert(testObj.height === undefined, 'Obj.unset works');
 
 
 // reset
 Obj.reset(testObj, {color: 'red'});
-console.assert(
+assert(
 	JSON.stringify(testObj) === JSON.stringify({color: 'red'}),
-	'Obj.reset is not working'
+	'Obj.reset works'
 );
 
 
 // changed
 Obj.subscribe(testObj, function(newObj) {
-	console.assert(
+	assert(
 		newObj.color === 'green',
-		'Obj.changed is not working'
+		'Obj.changed works'
 	);
 });
 
 testObj.color = 'green';
 Obj.changed(testObj);
+
+
+// Closing message:
+var numCompleted = numPassed + numFailed;
+console.log('%d assertions completed. %d passed, and %d failed.', numCompleted, numPassed, numFailed);
