@@ -19,7 +19,6 @@
 		return -1;
 	}
 
-	// requires: objProto
 	Obj.has = function(obj, key) {
 		return Obj.hasOwnProperty.call(obj, key);
 	};
@@ -31,7 +30,6 @@
 		return keys;
 	};
 
-	// requires: objProto
 	Obj.type = function(obj) {
 		return Obj.toString.call(obj).slice(8,-1).toLowerCase();
 	};
