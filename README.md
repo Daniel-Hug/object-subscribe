@@ -1,7 +1,7 @@
 Unobtrusive JS object subscribe
 ===============================
 
-1.2 kb bytes minified, 580 bytes minified and gzipped
+1.3 kb minified, 0.6 kb minified and gzipped
 ```
 npm install object-subscribe
 ```
@@ -19,7 +19,7 @@ var person = {
 
 Subscribe to changes made to the object:
 ```
-Obj.subscribe(person, function(newPersonObject) {
+Obj.subscribe(person, function(newPersonObject, whatChanged) {
 	console.log(newPersonObject);
 }, true); // Pass true to execute callback now.
 ```
@@ -27,7 +27,7 @@ Obj.subscribe(person, function(newPersonObject) {
 
 ## Modify the object
 
-The callback passed to `Obj.subscribe` is called every time one of the following is called:
+The callback passed to `Obj.subscribe` is called every time one of the following is called, unless `false` is passed as the last argument:
 
  - `Obj.set`
  - `Obj.unset`
