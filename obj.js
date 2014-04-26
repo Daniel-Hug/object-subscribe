@@ -72,31 +72,32 @@
 	};
 
 	// requires: has, changed
-	Obj.set = function(obj, pairs) {
+	Obj.set = function(obj, pairs, notify) {
 		for (var key in pairs) if (Obj.has(pairs, key)) obj[key] = pairs[key];
-		Obj.changed(obj);
+		if (notify !== false) Obj.changed(obj, {set: pairs});
 	};
 
 	// requires: changed
-	Obj.unset = function(obj, keys) {
+	Obj.unset = function(obj, keys, notify) {
 		for (var i = keys.length; i--;) delete obj[keys[i]];
-		Obj.changed(obj);
+		if (notify !== false) Obj.changed(obj, {unset: keys});
 	};
 
 	// requires: has, set, changed
-	Obj.reset = function(obj, pairs) {
+	Obj.reset = function(obj, pairs, notify) {
 		for (var key in obj) if (Obj.has(obj, key)) delete obj[key];
-		Obj.set(obj, pairs);
+		Obj.set(obj, pairs, false);
+		if (notify !== false) Obj.changed(obj, {reset: pairs || {}});
 	};
 
 	// requires: getIndex, map
-	Obj.changed = function(obj) {
-		var mapIndex = getIndex(obj), i;
+	Obj.changed = function(obj, whatChanged) {
+		var mapIndex = getIndex(obj);
 		if (mapIndex >= 0) {
 			var subscribers = map[mapIndex][1],
 			numSubscribers = subscribers.length;
-			for (i = 0; i < numSubscribers; i++) {
-				subscribers[i](obj);
+			for (var i = 0; i < numSubscribers; i++) {
+				subscribers[i](obj, whatChanged);
 			}
 		}
 	};
