@@ -1,7 +1,7 @@
 {
 	"author": "Daniel Hug",
 	"name": "object-subscribe",
-	"version": "2.2.2",
+	"version": "2.2.3",
 	"description": "Unobtrusive object subscribe / watch / bind",
 	"keywords": [
 		"subscribe",

@@ -36,16 +36,10 @@
 
 	// requires: has, type, extend
 	Obj.extend = function(obj, newObj) {
-		if (typeof obj === 'object') {
-			if (Obj.type(obj) === 'array') {
-				newObj = newObj || [];
-				for (var i = 0, l = obj.length; i < l; i++) newObj.push(Obj.extend(obj[i]));
-			} else {
-				newObj = newObj || {};
-				for (var key in obj) if (Obj.has(obj, key))
-					newObj[key] = Obj.extend(obj[key]);
-			}
-		} else return obj;
+		if (obj == null || typeof obj !== 'object') return obj;
+		newObj = newObj || (Obj.type(obj) === 'array' ? [] : {});
+		for (var key in obj) if (Obj.has(obj, key))
+			newObj[key] = Obj.extend(obj[key]);
 		return newObj;
 	};
 
@@ -69,33 +63,36 @@
 		}
 	};
 
-	// requires: has, changed
+	// requires: extend, has, changed
 	Obj.set = function(obj, pairs, notify) {
+		if (notify) var oldObj = Obj.extend(obj);
 		for (var key in pairs) if (Obj.has(pairs, key)) obj[key] = pairs[key];
-		if (notify !== false) Obj.changed(obj, {set: pairs});
+		if (notify) Obj.changed(obj, oldObj);
 	};
 
-	// requires: changed
+	// requires: extend, changed
 	Obj.unset = function(obj, keys, notify) {
+		if (notify) var oldObj = Obj.extend(obj);
 		for (var i = keys.length; i--;) delete obj[keys[i]];
-		if (notify !== false) Obj.changed(obj, {unset: keys});
+		if (notify) Obj.changed(obj, oldObj);
 	};
 
-	// requires: has, set, changed
+	// requires: extend, has, set, changed
 	Obj.reset = function(obj, pairs, notify) {
+		if (notify) var oldObj = Obj.extend(obj);
 		for (var key in obj) if (Obj.has(obj, key)) delete obj[key];
-		Obj.set(obj, pairs, false);
-		if (notify !== false) Obj.changed(obj, {reset: pairs || {}});
+		Obj.set(obj, pairs, 1);
+		if (notify) Obj.changed(obj, oldObj);
 	};
 
 	// requires: getIndex, map
-	Obj.changed = function(obj, whatChanged) {
-		var mapIndex = getIndex(obj);
+	Obj.changed = function(newObj, oldObj) {
+		var mapIndex = getIndex(newObj);
 		if (mapIndex >= 0) {
 			var subscribers = map[mapIndex][1],
 			numSubscribers = subscribers.length;
 			for (var i = 0; i < numSubscribers; i++) {
-				subscribers[i](obj, whatChanged);
+				subscribers[i](newObj, oldObj);
 			}
 		}
 	};

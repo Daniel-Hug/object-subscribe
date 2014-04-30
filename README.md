@@ -27,7 +27,7 @@ Obj.subscribe(person, function(newPersonObject, whatChanged) {
 
 ## Modify the object
 
-The callback passed to `Obj.subscribe` is called every time one of the following is called, unless `false` is passed as the last argument:
+The callback passed to `Obj.subscribe` is called every time one of the following is called, unless a truthy value is passed as the third argument:
 
  - `Obj.set`
  - `Obj.unset`
