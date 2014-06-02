@@ -64,25 +64,25 @@
 	};
 
 	// requires: extend, has, changed
-	Obj.set = function(obj, pairs, notify) {
-		if (notify) var oldObj = Obj.extend(obj);
+	Obj.set = function(obj, pairs, silent) {
+		if (!silent) var oldObj = Obj.extend(obj);
 		for (var key in pairs) if (Obj.has(pairs, key)) obj[key] = pairs[key];
-		if (notify) Obj.changed(obj, oldObj);
+		if (oldObj) Obj.changed(obj, oldObj);
 	};
 
 	// requires: extend, changed
-	Obj.unset = function(obj, keys, notify) {
-		if (notify) var oldObj = Obj.extend(obj);
+	Obj.unset = function(obj, keys, silent) {
+		if (!silent) var oldObj = Obj.extend(obj);
 		for (var i = keys.length; i--;) delete obj[keys[i]];
-		if (notify) Obj.changed(obj, oldObj);
+		if (oldObj) Obj.changed(obj, oldObj);
 	};
 
 	// requires: extend, has, set, changed
-	Obj.reset = function(obj, pairs, notify) {
-		if (notify) var oldObj = Obj.extend(obj);
+	Obj.reset = function(obj, pairs, silent) {
+		if (!silent) var oldObj = Obj.extend(obj);
 		for (var key in obj) if (Obj.has(obj, key)) delete obj[key];
 		Obj.set(obj, pairs, 1);
-		if (notify) Obj.changed(obj, oldObj);
+		if (oldObj) Obj.changed(obj, oldObj);
 	};
 
 	// requires: getIndex, map
