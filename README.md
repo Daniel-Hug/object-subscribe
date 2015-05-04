@@ -10,7 +10,7 @@ npm install object-subscribe
 ## Create & subscribe to an object
 
 Create an object:
-```
+```js
 var person = {
 	name: 'Joey',
 	age: 3
@@ -18,7 +18,7 @@ var person = {
 ```
 
 Subscribe to changes made to the object:
-```
+```js
 Obj.subscribe(person, function(newPersonObject, whatChanged) {
 	console.log(newPersonObject);
 }, true); // Pass true to execute callback now.
@@ -35,7 +35,7 @@ The callback passed to `Obj.subscribe` is called every time one of the following
  - `Obj.changed`
 
 Use those functions like this:
-```
+```js
 Obj.set(person, {age: 11, height: 50, favoriteColor: 'rainbow'});
 	//=> {name: 'Joey', age: 11, height: 50, favoriteColor: 'rainbow'}
 
@@ -53,7 +53,7 @@ Obj.changed(person);
 
 ## Unsubscribe
 
-```
+```js
 Obj.unsubscribe(person); // Unsubscribe all
 Obj.unsubscribe(person, [fn1, fn2]); // Unsubscribe one or more functions
 ```
@@ -62,7 +62,7 @@ Obj.unsubscribe(person, [fn1, fn2]); // Unsubscribe one or more functions
 ## Helper functions
 
 obj.js comes with four helper functions. `Obj.has` for safe `hasOwnProperty` checks and `Obj.keys` which returns an array of an object's keys, `Obj.type` as a more robust `typeof`, and `Obj.extend` for cloning and extending simple objects and arrays. `Obj.keys` uses the native `Object.keys` if available.
-```
+```js
 Obj.has(person, 'name');          //=> true
 Obj.keys(person);                 //=> ['name', 'age']
 Obj.type([]);                     //=> 'array'
@@ -71,7 +71,7 @@ Obj.extend({height: 50}, person); //=> {name: 'Bob', age: 7, height: 50}
 
 ### More examples using `Obj.extend`
 
-```
+```js
 // Clone an object or an array:
 var clonedObjOrArray = Obj.extend(objectOrArray);
 
@@ -88,7 +88,7 @@ Obj.extend(arrayA, arrayB);
 All the code is very modular, so you can easily delete the parts you don't use.
 
 You can also add your own methods:
-```
+```js
 Obj.increment = function(obj, key) {
 	obj[key]++;
 	Obj.changed(obj); // Notify subscribers of change
