@@ -19,9 +19,8 @@
 		return -1;
 	}
 
-	Obj.has = function(obj, key) {
-		return Obj.hasOwnProperty.call(obj, key);
-	};
+	var call = getIndex.call;
+	Obj.has = call.bind(Obj.hasOwnProperty);
 
 	// requires: has
 	Obj.keys = Object.keys || function(obj) {
